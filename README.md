@@ -3,3 +3,40 @@
 </p>
 
 # HydraDaemon-Panel
+
+### Panel
+```
+sudo su
+```
+```
+bash <( curl -s https://raw.githubusercontent.com/Omar9282jwee/HydraDaemon-Panel/refs/heads/main/Hydra)
+```
+### Node install
+```
+git clone https://github.com/hydren-dev/HydraDAEMON
+```
+```
+cd HydraDAEMON
+```
+```
+npm install
+```
+- paste your configure of node
+```
+node .
+```
+### Again start
+- again start your dash
+```
+cd oversee-fixed
+```
+```
+node .
+```
+- create a new terminal (+)
+```
+cd HydraDAEMON
+```
+```
+node .
+```

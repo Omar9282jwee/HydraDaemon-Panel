@@ -6,9 +6,6 @@
 
 ### Panel
 ```
-sudo su
-```
-```
 bash <( curl -s https://raw.githubusercontent.com/Omar9282jwee/HydraDaemon-Panel/refs/heads/main/Hydra)
 ```
 ### Node install

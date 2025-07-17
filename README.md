@@ -13,8 +13,7 @@ bash <( curl -s https://raw.githubusercontent.com/Omar9282jwee/HydraDaemon-Panel
 ```
 ### Node install
 ```
-git clone https://github.com/hydren-dev/HydraDAEMON
-```
+bash <( curl -s https://raw.githubusercontent.com/Omar9282jwee/HydraDaemon-Panel/refs/heads/main/node)
 ```
 cd HydraDAEMON
 ```
@@ -25,21 +24,7 @@ npm install
 ```
 node .
 ```
-### Again start
-- again start your dash
-```
-cd oversee-fixed
-```
-```
-node .
-```
-- create a new terminal (+)
-```
-cd HydraDAEMON
-```
-```
-node .
-```
+
 
 ### ip-costom-Minecraft
 ```

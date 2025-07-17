@@ -1,59 +1,44 @@
-#!/bin/bash
+# Update system and install required dependencies
+echo -e "\e[1;34m🔄 Updating system and installing required dependencies...\e[0m"
+apt update && apt install -y curl gnupg git
 
-# ASCII Art
-ascii_art="
+# Set up Node.js 20 repository
+echo -e "\e[1;35m🔧 Setting up Node.js 20 repository...\e[0m"
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 
-       _____         
-      |  ___|____  __
-      | |_ / _ \ \/ /
-      |  _| (_) >  < 
-      |_|  \___/_/\_\
+# Add NodeSource repository
+echo -e "\e[1;33m📦 Adding NodeSource repository...\e[0m"
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
-"
+# Update package lists again
+echo -e "\e[1;34m🔄 Updating package lists...\e[0m"
+apt update
 
-# Colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-YELLOW='\033[0;33m'
-NC='\033[0m' # No Color
+# Install Node.js and Git
+echo -e "\e[1;32m📥 Installing Node.js and Git...\e[0m"
+apt install -y nodejs git
 
-# Clear the screen
-clear
-# Check if the script is run as root
-if [ "$EUID" -ne 0 ]; then
-  echo -e "${RED}Please run this script as root.${NC}"
-  exit 1
+# Clone Oversee repository
+echo -e "\e[1;35m🔽 Cloning Oversee repository...\e[0m"
+if [ -d "Oversee" ]; then
+    rm -rf Oversee
 fi
+git clone https://github.com/ma4z-sys/Oversee.git
+cd Oversee
 
-echo -e "${CYAN}$ascii_art${NC}"
+# Install dependencies
+echo -e "\e[1;36m⚙️ Installing dependencies...\e[0m"
+npm install
 
+# Seed database
+echo -e "\e[1;33m🌱 Seeding database...\e[0m"
+npm run seed
 
-echo "* Installing Dependencies"
+# Create user
+echo -e "\e[1;32m👤 Creating user...\e[0m"
+npm run createUser
 
-# Update package list and install dependencies
-sudo apt update
-sudo apt install -y curl software-properties-common
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt-get install nodejs -y 
-sudo apt install git -y
-
-echo_message "* Installed Dependencies"
-
-echo_message "* Installing Files"
-
-# Create directory, clone repository, and install files
-
-git clone https://github.com/draco-labes/oversee-fixed.git && cd oversee-fixed && npm install && npm run seed && npm run createUser && node . 
-
-
-echo_message "* Installed Files"
-
-echo_message "* Starting Skyport"
-
-
-
-echo "* Skyport Installed and Started on Port 3001"
-
-
+# Start Oversee
+echo -e "\e[1;31m🚀 Starting Oversee...\e[0m"
+node .
